@@ -21,6 +21,12 @@ public class Configuration {
     @Expose
     private App app;
 
+    public Configuration(User user, Device device, App app) {
+        this.user = user;
+        this.device = device;
+        this.app = app;
+    }
+
     public User getUser() {
         return user;
     }

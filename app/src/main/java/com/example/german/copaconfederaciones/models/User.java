@@ -18,6 +18,16 @@ public class User {
     @Expose
     private Profile profile;
 
+    public User(Profile profile) {
+        this.profile = profile;
+    }
+
+    public User(String id, Rbac rbac, Profile profile) {
+        this.id = id;
+        this.rbac = rbac;
+        this.profile = profile;
+    }
+
     public String getId() {
         return id;
     }

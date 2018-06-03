@@ -37,6 +37,16 @@ public class Device {
     @Expose
     private String platform;
 
+    public Device(String deviceId, String name, String version, String width, String heigth, String model, String platform) {
+        this.deviceId = deviceId;
+        this.name = name;
+        this.version = version;
+        this.width = width;
+        this.heigth = heigth;
+        this.model = model;
+        this.platform = platform;
+    }
+
     public String getDeviceId() {
         return deviceId;
     }

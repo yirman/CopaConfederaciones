@@ -13,6 +13,10 @@ public class Profile {
     @Expose
     private String language;
 
+    public Profile(String language) {
+        this.language = language;
+    }
+
     public String getLanguage() {
         return language;
     }

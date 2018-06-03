@@ -13,6 +13,10 @@ public class App {
     @Expose
     private String version;
 
+    public App(String version) {
+        this.version = version;
+    }
+
     public String getVersion() {
         return version;
     }
