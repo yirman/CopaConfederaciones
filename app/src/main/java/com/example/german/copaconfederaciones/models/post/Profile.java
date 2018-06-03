@@ -1,4 +1,4 @@
-package com.example.german.copaconfederaciones.models;
+package com.example.german.copaconfederaciones.models.post;
 
 /**
  * Created by German on 2/6/2018.
