@@ -8,6 +8,8 @@ import com.google.gson.annotations.SerializedName;
 
 public class PostResponse {
 
+    public static final String TAG = PostResponse.class.getSimpleName();
+
     @SerializedName("data")
     @Expose
     private Data data;

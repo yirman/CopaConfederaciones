@@ -9,6 +9,8 @@ import com.google.gson.annotations.SerializedName;
 
 public class Configuration {
 
+    public static final String TAG = Configuration.class.getSimpleName();
+
     @SerializedName("user")
     @Expose
     private User user;
