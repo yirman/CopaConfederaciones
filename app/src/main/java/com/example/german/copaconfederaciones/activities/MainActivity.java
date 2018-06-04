@@ -21,7 +21,7 @@ import com.example.german.copaconfederaciones.models.Device;
 import com.example.german.copaconfederaciones.models.PostResponse;
 import com.example.german.copaconfederaciones.models.Profile;
 import com.example.german.copaconfederaciones.models.User;
-import com.example.german.copaconfederaciones.retrofit.Service;
+import com.example.german.copaconfederaciones.retrofit.ServiceGenerator;
 import com.example.german.copaconfederaciones.utils.Constants;
 import com.google.gson.Gson;
 
@@ -30,8 +30,6 @@ import java.util.Locale;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -63,15 +61,7 @@ public class MainActivity extends AppCompatActivity {
                     Configuration userConfiguration = createUserConfiguration();
                     Log.e(TAG, Configuration.TAG + new Gson().toJson(userConfiguration));
 
-
-                    Retrofit retrofit = new Retrofit.Builder()
-                            .baseUrl(Constants.BASE_URL)
-                            .addConverterFactory(GsonConverterFactory.create())
-                            .build();
-
-                    Service service = retrofit.create(Service.class);
-
-                    Call<PostResponse> login = service.login(createUserConfiguration());
+                    Call<PostResponse> login = ServiceGenerator.login(createUserConfiguration());
 
                     login.enqueue(new Callback<PostResponse>() {
                         @Override
