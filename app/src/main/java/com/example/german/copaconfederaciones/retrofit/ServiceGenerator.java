@@ -1,7 +1,7 @@
 package com.example.german.copaconfederaciones.retrofit;
 
-import com.example.german.copaconfederaciones.models.Configuration;
-import com.example.german.copaconfederaciones.models.PostResponse;
+import com.example.german.copaconfederaciones.models.post.Configuration;
+import com.example.german.copaconfederaciones.models.post.PostResponse;
 import com.example.german.copaconfederaciones.utils.Constants;
 
 import retrofit2.Call;

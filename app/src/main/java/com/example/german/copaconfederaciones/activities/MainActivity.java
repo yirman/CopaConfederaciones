@@ -13,14 +13,13 @@ import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.german.copaconfederaciones.BuildConfig;
 import com.example.german.copaconfederaciones.R;
-import com.example.german.copaconfederaciones.models.App;
-import com.example.german.copaconfederaciones.models.Configuration;
-import com.example.german.copaconfederaciones.models.Device;
-import com.example.german.copaconfederaciones.models.PostResponse;
-import com.example.german.copaconfederaciones.models.Profile;
-import com.example.german.copaconfederaciones.models.User;
+import com.example.german.copaconfederaciones.models.post.App;
+import com.example.german.copaconfederaciones.models.post.Configuration;
+import com.example.german.copaconfederaciones.models.post.Device;
+import com.example.german.copaconfederaciones.models.post.PostResponse;
+import com.example.german.copaconfederaciones.models.post.Profile;
+import com.example.german.copaconfederaciones.models.post.User;
 import com.example.german.copaconfederaciones.retrofit.ServiceGenerator;
 import com.example.german.copaconfederaciones.utils.Constants;
 import com.google.gson.Gson;
@@ -61,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                     Configuration userConfiguration = createUserConfiguration();
                     Log.e(TAG, Configuration.TAG + new Gson().toJson(userConfiguration));
 
-                    Call<PostResponse> login = ServiceGenerator.login(createUserConfiguration());
+                    Call<PostResponse> login = ServiceGenerator.login(userConfiguration);
 
                     login.enqueue(new Callback<PostResponse>() {
                         @Override
@@ -110,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
 
         Device device = new Device(deviceId, manufacturer, release, width, height, model, platform);
 
-        String versionName = BuildConfig.VERSION_NAME;
+        String versionName = Constants.FIXED_APP_VERSION;
 
         App app = new App(versionName);
 
