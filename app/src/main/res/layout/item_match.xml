@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="date"/>
+            android:text="@string/date"/>
 
     </LinearLayout>
 
@@ -44,14 +44,14 @@
                 android:layout_weight="1"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="Team A"/>
+                android:text="@string/team_a"/>
 
             <TextView
                 android:id="@+id/tv_score_team_a"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="N"/>
+                android:text="@string/score"/>
 
         </LinearLayout>
 
@@ -59,7 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text=":"/>
+            android:text="@string/separator"/>
 
         <LinearLayout
             android:id="@+id/ll_team_b"
@@ -73,7 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="N"/>
+                android:text="@string/score"/>
 
             <TextView
                 android:id="@+id/tv_name_team_b"
@@ -82,7 +82,7 @@
                 android:layout_weight="1"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="Team B"/>
+                android:text="@string/team_b"/>
 
             <ImageView
                 android:layout_width="50dp"
@@ -102,7 +102,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="status"/>
+            android:text="@string/status"/>
 
     </LinearLayout>
 
