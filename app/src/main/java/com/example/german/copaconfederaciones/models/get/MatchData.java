@@ -13,7 +13,6 @@ import io.realm.annotations.Required;
 public class MatchData extends RealmObject {
 
     @PrimaryKey
-    @Required
     private int id;
 
     @SerializedName("data")
