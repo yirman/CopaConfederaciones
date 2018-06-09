@@ -4,6 +4,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.german.copaconfederaciones.R;
 import com.example.german.copaconfederaciones.models.get.Item;
@@ -30,7 +32,7 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHol
     }
 
     @Override
-    public void onBindViewHolder(MatchViewHolder holder, int position) {
+    public void onBindViewHolder(MatchViewHolder holder, int i) {
 
     }
 
@@ -41,8 +43,32 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHol
 
     public static class MatchViewHolder extends RecyclerView.ViewHolder{
 
+        public TextView date;
+
+        public ImageView imageTeamA;
+        public TextView nameTeamA;
+        public TextView scoreTeamA;
+
+        public ImageView imageTeamB;
+        public TextView nameTeamB;
+        public TextView scoreTeamB;
+
+        public TextView status;
+
         public MatchViewHolder(View itemView) {
             super(itemView);
+
+            this.date = itemView.findViewById(R.id.tv_match_date);
+            this.imageTeamA = itemView.findViewById(R.id.iv_image_team_a);
+            this.nameTeamA = itemView.findViewById(R.id.tv_name_team_a);
+            this.scoreTeamA = itemView.findViewById(R.id.tv_score_team_a);
+
+            this.imageTeamB = itemView.findViewById(R.id.iv_image_team_b);
+            this.nameTeamB = itemView.findViewById(R.id.tv_name_team_b);
+            this.scoreTeamB = itemView.findViewById(R.id.tv_score_team_b);
+
+            this.status = itemView.findViewById(R.id.tv_match_status);
+
         }
     }
 
