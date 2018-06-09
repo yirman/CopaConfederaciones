@@ -27,13 +27,21 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHol
     @Override
     public MatchViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_match, parent, false);
-        MatchViewHolder mvh = new MatchViewHolder(view);
-        return mvh;
+        return new MatchViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(MatchViewHolder holder, int i) {
 
+        holder.date.setText(items.get(i).getStartDate());
+
+        holder.nameTeamA.setText(items.get(i).getHomeTeam().getName());
+        holder.scoreTeamA.setText(String.valueOf(items.get(i).getHomeScore()));
+
+        holder.nameTeamB.setText(items.get(i).getAwayTeam().getName());
+        holder.scoreTeamB.setText(String.valueOf(items.get(i).getAwayScore()));
+
+        holder.status.setText(items.get(i).getEventStatus().getName().getOriginal());
     }
 
     @Override
