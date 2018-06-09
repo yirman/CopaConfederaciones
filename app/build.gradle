@@ -42,4 +42,7 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.4.0'
 
     implementation 'com.android.support:recyclerview-v7:26.1.0'
+
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
 }

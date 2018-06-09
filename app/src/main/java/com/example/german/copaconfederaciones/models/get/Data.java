@@ -7,28 +7,31 @@ import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Data {
+import io.realm.RealmList;
+import io.realm.RealmObject;
+
+public class Data extends RealmObject{
 
     @SerializedName("sections")
     @Expose
-    private List<Section> sections = null;
+    private RealmList<Section> sections = null;
     @SerializedName("items")
     @Expose
-    private List<Item> items = null;
+    private RealmList<Item> items = null;
 
-    public List<Section> getSections() {
+    public RealmList<Section> getSections() {
         return sections;
     }
 
-    public void setSections(List<Section> sections) {
+    public void setSections(RealmList<Section> sections) {
         this.sections = sections;
     }
 
-    public List<Item> getItems() {
+    public RealmList<Item> getItems() {
         return items;
     }
 
-    public void setItems(List<Item> items) {
+    public void setItems(RealmList<Item> items) {
         this.items = items;
     }
 

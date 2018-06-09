@@ -6,7 +6,9 @@ package com.example.german.copaconfederaciones.models.get;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Section {
+import io.realm.RealmObject;
+
+public class Section extends RealmObject {
 
     @SerializedName("title")
     @Expose

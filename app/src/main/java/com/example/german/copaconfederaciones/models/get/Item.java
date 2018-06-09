@@ -7,7 +7,9 @@ package com.example.german.copaconfederaciones.models.get;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Item {
+import io.realm.RealmObject;
+
+public class Item extends RealmObject {
 
     @SerializedName("matchDay")
     @Expose
@@ -42,12 +44,6 @@ public class Item {
     @SerializedName("matchTime")
     @Expose
     private int matchTime;
-    @SerializedName("homePenalties")
-    @Expose
-    private Object homePenalties;
-    @SerializedName("awayPenalties")
-    @Expose
-    private Object awayPenalties;
     @SerializedName("endDate")
     @Expose
     private String endDate;
@@ -138,22 +134,6 @@ public class Item {
 
     public void setMatchTime(int matchTime) {
         this.matchTime = matchTime;
-    }
-
-    public Object getHomePenalties() {
-        return homePenalties;
-    }
-
-    public void setHomePenalties(Object homePenalties) {
-        this.homePenalties = homePenalties;
-    }
-
-    public Object getAwayPenalties() {
-        return awayPenalties;
-    }
-
-    public void setAwayPenalties(Object awayPenalties) {
-        this.awayPenalties = awayPenalties;
     }
 
     public String getEndDate() {

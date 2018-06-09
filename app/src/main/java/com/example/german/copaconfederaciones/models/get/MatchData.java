@@ -6,11 +6,24 @@ package com.example.german.copaconfederaciones.models.get;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class MatchData {
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+import io.realm.annotations.Required;
+
+public class MatchData extends RealmObject {
+
+    @PrimaryKey
+    @Required
+    private int id;
 
     @SerializedName("data")
     @Expose
     private Data data;
+
+    public MatchData(int id, Data data) {
+        this.id = id;
+        this.data = data;
+    }
 
     public Data getData() {
         return data;
