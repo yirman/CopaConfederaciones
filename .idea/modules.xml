@@ -3,8 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CopaConfederaciones.iml" filepath="$PROJECT_DIR$/CopaConfederaciones.iml" />
-      <module fileurl="file://C:\Users\German\AndroidStudioProjects\CopaConfederaciones\.idea\CopaConfederaciones.iml" filepath="C:\Users\German\AndroidStudioProjects\CopaConfederaciones\.idea\CopaConfederaciones.iml" />
       <module fileurl="file://C:\Users\xpectra\AndroidStudioProjects\CopaConfederaciones\CopaConfederaciones.iml" filepath="C:\Users\xpectra\AndroidStudioProjects\CopaConfederaciones\CopaConfederaciones.iml" />
+      <module fileurl="file://C:\Users\German\AndroidStudioProjects\CopaConfederaciones\.idea\CopaConfederaciones.iml" filepath="C:\Users\German\AndroidStudioProjects\CopaConfederaciones\.idea\CopaConfederaciones.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
