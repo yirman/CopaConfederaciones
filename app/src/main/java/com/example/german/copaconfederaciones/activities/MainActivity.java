@@ -1,6 +1,7 @@
 package com.example.german.copaconfederaciones.activities;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Point;
 import android.os.Build;
@@ -16,12 +17,14 @@ import android.widget.Button;
 import com.example.german.copaconfederaciones.R;
 import com.example.german.copaconfederaciones.models.post.App;
 import com.example.german.copaconfederaciones.models.post.Configuration;
+import com.example.german.copaconfederaciones.models.post.Data;
 import com.example.german.copaconfederaciones.models.post.Device;
 import com.example.german.copaconfederaciones.models.post.PostResponse;
 import com.example.german.copaconfederaciones.models.post.Profile;
 import com.example.german.copaconfederaciones.models.post.User;
 import com.example.german.copaconfederaciones.retrofit.ServiceGenerator;
 import com.example.german.copaconfederaciones.utils.Constants;
+import com.example.german.copaconfederaciones.utils.PreferenceManager;
 import com.google.gson.Gson;
 
 import java.util.Locale;
@@ -70,6 +73,16 @@ public class MainActivity extends AppCompatActivity {
 
                             if(response.isSuccessful()){
                                 Log.e(TAG, PostResponse.TAG + new Gson().toJson(response.body()));
+
+                                Data data = response.body().getData();
+
+                                String token = data.getTokenType() +
+                                        " " +
+                                        data.getAccessToken();
+
+                                PreferenceManager.edit(MainActivity.this)
+                                        .putString(Constants.ACCESS_TOKEN, token)
+                                        .commit();
                             }
                         }
 
