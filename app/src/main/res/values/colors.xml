@@ -21,6 +21,7 @@
     <color name="navy">#000080</color>
     <color name="black">#000000</color>
 
+    <color name="Ash">#C3C2AD</color>
     <color name="White">#FFFFFF</color>
     <color name="Ivory">#FFFFF0</color>
     <color name="LightYellow">#FFFFE0</color>
@@ -156,6 +157,7 @@
     <color name="Teal">#008080</color>
     <color name="Green">#008000</color>
     <color name="DarkGreen">#006400</color>
+    <color name="ToreaBay">#0E478C</color>
     <color name="Blue">#0000FF</color>
     <color name="MediumBlue">#0000CD</color>
     <color name="DarkBlue">#00008B</color>

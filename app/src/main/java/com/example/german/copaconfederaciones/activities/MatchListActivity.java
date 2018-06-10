@@ -96,10 +96,10 @@ public class MatchListActivity extends AppCompatActivity {
         matchesList.setAdapter(adapter);
         matchesList.addItemDecoration(
                 new MatchAdapter.Decoration(
-                0,
-                50,
-                R.color.DarkTurquoise,
-                0)
+                        0,
+                        50,
+                        R.color.Crimson,
+                        R.color.Ash)
         );
         matchesList.setVisibility(View.VISIBLE);
     }

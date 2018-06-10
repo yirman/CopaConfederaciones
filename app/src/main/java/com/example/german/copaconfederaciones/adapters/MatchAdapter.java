@@ -178,7 +178,7 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHol
             if( (state.getItemCount() - 1) == (parent.getChildAdapterPosition(view)) )
                 outRect.bottom = 0;
 
-            if(parent.getChildAdapterPosition(view) % 2 != 0)
+            if(parent.getChildAdapterPosition(view) % 2 == 0)
                 view.setBackgroundResource(this.colorId1);
             else
                 view.setBackgroundResource(this.colorId2);
