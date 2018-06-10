@@ -43,8 +43,8 @@
 
             <ImageView
                 android:id="@+id/iv_image_team_a"
-                android:layout_width="50dp"
-                android:layout_height="50dp" />
+                android:layout_width="@dimen/iv_size_team_flag"
+                android:layout_height="@dimen/iv_size_team_flag" />
 
             <TextView
                 android:id="@+id/tv_name_team_a"
@@ -95,8 +95,8 @@
 
             <ImageView
                 android:id="@+id/iv_image_team_b"
-                android:layout_width="50dp"
-                android:layout_height="50dp" />
+                android:layout_width="@dimen/iv_size_team_flag"
+                android:layout_height="@dimen/iv_size_team_flag" />
 
         </LinearLayout>
 

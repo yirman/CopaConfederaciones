@@ -98,7 +98,7 @@ public class MatchListActivity extends AppCompatActivity {
                 new MatchAdapter.Decoration(
                 0,
                 50,
-                0,
+                R.color.DarkTurquoise,
                 0)
         );
         matchesList.setVisibility(View.VISIBLE);

@@ -141,20 +141,30 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHol
         private int paddingBottom;
         private int paddingLeft;
         private int paddingRight;
+        private int colorId1;
+        private int colorId2;
 
-        public Decoration(int padding) {
-            this(padding, padding, padding, padding);
+        public Decoration(int padding, int colorid1, int colorid2) {
+            this(padding, padding, padding, padding, colorid1, colorid2);
         }
 
-        public Decoration(int paddingTopBottom, int paddingLeftRight) {
-            this(paddingTopBottom, paddingTopBottom, paddingLeftRight, paddingLeftRight);
+        public Decoration(int paddingTopBottom, int paddingLeftRight, int colorid1, int colorid2) {
+            this(paddingTopBottom, paddingTopBottom, paddingLeftRight, paddingLeftRight, colorid1, colorid2);
         }
 
-        public Decoration(int paddingTop, int paddingBottom, int paddingLeft, int paddingRight) {
+        public Decoration(int paddingTop,
+                          int paddingBottom,
+                          int paddingLeft,
+                          int paddingRight,
+                          int colorid1,
+                          int colorid2) {
+
             this.paddingTop = paddingTop;
             this.paddingBottom = paddingBottom;
             this.paddingLeft = paddingLeft;
             this.paddingRight = paddingRight;
+            this.colorId1 = colorid1;
+            this.colorId2 = colorid2;
         }
 
         @Override
@@ -168,6 +178,10 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHol
             if( (state.getItemCount() - 1) == (parent.getChildAdapterPosition(view)) )
                 outRect.bottom = 0;
 
+            if(parent.getChildAdapterPosition(view) % 2 != 0)
+                view.setBackgroundResource(this.colorId1);
+            else
+                view.setBackgroundResource(this.colorId2);
         }
     }
 
