@@ -87,6 +87,13 @@ public class MatchListActivity extends AppCompatActivity {
 
         MatchAdapter adapter = new MatchAdapter(matchData.getData().getItems());
         matchesList.setAdapter(adapter);
+        matchesList.addItemDecoration(
+                new MatchAdapter.MatchAdapterDecoration(
+                0,
+                50,
+                0,
+                0)
+        );
 
     }
 }

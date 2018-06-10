@@ -1,5 +1,6 @@
 package com.example.german.copaconfederaciones.adapters;
 
+import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -76,6 +77,42 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHol
             this.scoreTeamB = itemView.findViewById(R.id.tv_score_team_b);
 
             this.status = itemView.findViewById(R.id.tv_match_status);
+
+        }
+    }
+
+    public static class MatchAdapterDecoration extends RecyclerView.ItemDecoration{
+
+        private int paddingTop;
+        private int paddingBottom;
+        private int paddingLeft;
+        private int paddingRight;
+
+        public MatchAdapterDecoration(int padding) {
+            this(padding, padding, padding, padding);
+        }
+
+        public MatchAdapterDecoration(int paddingTopBottom, int paddingLeftRight) {
+            this(paddingTopBottom, paddingTopBottom, paddingLeftRight, paddingLeftRight);
+        }
+
+        public MatchAdapterDecoration(int paddingTop, int paddingBottom, int paddingLeft, int paddingRight) {
+            this.paddingTop = paddingTop;
+            this.paddingBottom = paddingBottom;
+            this.paddingLeft = paddingLeft;
+            this.paddingRight = paddingRight;
+        }
+
+        @Override
+        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+
+            outRect.top = paddingTop;
+            outRect.bottom = paddingBottom;
+            outRect.left = paddingLeft;
+            outRect.right = paddingRight;
+
+            if( (state.getItemCount() - 1) == (parent.getChildAdapterPosition(view)) )
+                outRect.bottom = 0;
 
         }
     }
