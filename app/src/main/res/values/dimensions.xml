@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="tittle_size_match_list">20sp</dimen>
+    <dimen name="tv_text_tittle_match_list_size">20sp</dimen>/*TextView sizes*/
+    <dimen name="tv_text_team_name_size">20sp</dimen>
+    <dimen name="tv_text_team_score_size">25sp</dimen>
+
     <dimen name="iv_size_team_flag">50dp</dimen>
 
 </resources>

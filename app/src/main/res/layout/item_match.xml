@@ -30,8 +30,6 @@
         android:id="@+id/ll_score_board"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="5dp"
-        android:paddingEnd="5dp"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -53,6 +51,7 @@
                 android:layout_weight="1"
                 android:layout_gravity="center"
                 android:gravity="center"
+                android:textSize="@dimen/tv_text_team_name_size"
                 android:text="@string/team_a"/>
 
             <TextView
@@ -60,6 +59,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:textSize="@dimen/tv_text_team_score_size"
                 android:text="@string/score"/>
 
         </LinearLayout>
@@ -82,6 +82,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:textSize="@dimen/tv_text_team_score_size"
                 android:text="@string/score"/>
 
             <TextView
@@ -91,6 +92,7 @@
                 android:layout_weight="1"
                 android:layout_gravity="center"
                 android:gravity="center"
+                android:textSize="@dimen/tv_text_team_name_size"
                 android:text="@string/team_b"/>
 
             <ImageView

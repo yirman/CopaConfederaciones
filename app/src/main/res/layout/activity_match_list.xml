@@ -21,7 +21,7 @@
         android:background="@color/ToreaBay"
         android:text="@string/coup_confederations"
         android:textColor="@color/LavenderBlush"
-        android:textSize="@dimen/tittle_size_match_list"/>
+        android:textSize="@dimen/tv_text_tittle_match_list_size"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/matches_recycler_view"
