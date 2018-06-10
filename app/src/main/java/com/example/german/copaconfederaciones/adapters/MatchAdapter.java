@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.german.copaconfederaciones.R;
 import com.example.german.copaconfederaciones.models.get.Item;
+import com.example.german.copaconfederaciones.utils.Utilities;
 
 import java.util.List;
 
@@ -34,15 +35,64 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHol
     @Override
     public void onBindViewHolder(MatchViewHolder holder, int i) {
 
-        holder.date.setText(items.get(i).getStartDate());
+        String ISO8601UTC = items.get(i).getStartDate();
+        String ISO8601Local = Utilities.toLocalDateTime(ISO8601UTC);
+        String regularDate = Utilities.getRegularDate(ISO8601Local);
+        String regularTime = Utilities.getRegularTime(ISO8601Local);
 
-        holder.nameTeamA.setText(items.get(i).getHomeTeam().getName());
+        holder.date.setText(regularDate);
+        holder.time.setText(regularTime);
+
+        String teamA = items.get(i).getHomeTeam().getName();
+        holder.nameTeamA.setText(teamA);
         holder.scoreTeamA.setText(String.valueOf(items.get(i).getHomeScore()));
+        setTeamImage(teamA, holder.imageTeamA);
 
-        holder.nameTeamB.setText(items.get(i).getAwayTeam().getName());
+        String teamB = items.get(i).getAwayTeam().getName();
+        holder.nameTeamB.setText(teamB);
         holder.scoreTeamB.setText(String.valueOf(items.get(i).getAwayScore()));
+        setTeamImage(teamB, holder.imageTeamB);
 
         holder.status.setText(items.get(i).getEventStatus().getName().getOriginal());
+    }
+
+    private void setTeamImage(String team, ImageView imageView){
+
+        switch(team){
+
+            case "Nueva Zelanda":
+                imageView.setImageResource(R.drawable.ic_new_zealand_team);
+                break;
+
+            case "Rusia":
+                imageView.setImageResource(R.drawable.ic_russia_team);
+                break;
+
+            case "Portugal":
+                imageView.setImageResource(R.drawable.ic_portugal_team);
+                break;
+
+            case "México":
+                imageView.setImageResource(R.drawable.ic_mexico_team);
+                break;
+
+            case "Camerún":
+                imageView.setImageResource(R.drawable.ic_cameroon_team);
+                break;
+
+            case "Chile":
+                imageView.setImageResource(R.drawable.ic_chile_team);
+                break;
+
+            case "Australia":
+                imageView.setImageResource(R.drawable.ic_australia_team);
+                break;
+
+            case "Alemania":
+                imageView.setImageResource(R.drawable.ic_germany_team);
+                break;
+        }
+
     }
 
     @Override
@@ -53,6 +103,7 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHol
     public static class MatchViewHolder extends RecyclerView.ViewHolder{
 
         public TextView date;
+        public TextView time;
 
         public ImageView imageTeamA;
         public TextView nameTeamA;
@@ -68,6 +119,8 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHol
             super(itemView);
 
             this.date = itemView.findViewById(R.id.tv_match_date);
+            this.time = itemView.findViewById(R.id.tv_match_time);
+
             this.imageTeamA = itemView.findViewById(R.id.iv_image_team_a);
             this.nameTeamA = itemView.findViewById(R.id.tv_name_team_a);
             this.scoreTeamA = itemView.findViewById(R.id.tv_score_team_a);
@@ -77,6 +130,7 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHol
             this.scoreTeamB = itemView.findViewById(R.id.tv_score_team_b);
 
             this.status = itemView.findViewById(R.id.tv_match_status);
+
 
         }
     }
