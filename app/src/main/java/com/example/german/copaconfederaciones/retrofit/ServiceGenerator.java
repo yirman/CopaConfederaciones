@@ -1,5 +1,6 @@
 package com.example.german.copaconfederaciones.retrofit;
 
+import com.example.german.copaconfederaciones.models.get.MatchData;
 import com.example.german.copaconfederaciones.models.post.Configuration;
 import com.example.german.copaconfederaciones.models.post.PostResponse;
 import com.example.german.copaconfederaciones.utils.Constants;
@@ -27,4 +28,7 @@ public class ServiceGenerator {
         return retrofitBuilder().create(Service.class).login(configuration);
     }
 
+    public static Call<MatchData> getMatches(String token){
+        return retrofitBuilder().create(Service.class).getMatches(token);
+    }
 }

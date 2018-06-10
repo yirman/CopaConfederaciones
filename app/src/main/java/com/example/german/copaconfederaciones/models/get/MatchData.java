@@ -27,6 +27,14 @@ public class MatchData extends RealmObject {
         this.data = data;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public Data getData() {
         return data;
     }
