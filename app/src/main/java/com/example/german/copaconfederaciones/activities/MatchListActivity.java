@@ -4,6 +4,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.example.german.copaconfederaciones.R;
 import com.example.german.copaconfederaciones.adapters.MatchAdapter;
@@ -20,8 +22,9 @@ import retrofit2.Response;
 public class MatchListActivity extends AppCompatActivity {
 
     private Realm realm;
-    private RecyclerView matchesList;
     private MatchData matchData;
+    private RecyclerView matchesList;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +33,7 @@ public class MatchListActivity extends AppCompatActivity {
 
         this.realm = Realm.getDefaultInstance();
         this.matchesList = findViewById(R.id.matches_recycler_view);
+        this.progressBar = findViewById(R.id.progress_bar);
 
         this.realm.executeTransaction(new Realm.Transaction() {
             @Override
@@ -61,6 +65,7 @@ public class MatchListActivity extends AppCompatActivity {
                     });
 
                     loadMatchData(matchData);
+                    progressBar.setVisibility(View.GONE);
                 }
 
                 @Override
@@ -69,8 +74,10 @@ public class MatchListActivity extends AppCompatActivity {
                 }
             });
         }
-        else
+        else{
             this.loadMatchData(matchData);
+            progressBar.setVisibility(View.GONE);
+        }
 
 
     }
@@ -88,12 +95,12 @@ public class MatchListActivity extends AppCompatActivity {
         MatchAdapter adapter = new MatchAdapter(matchData.getData().getItems());
         matchesList.setAdapter(adapter);
         matchesList.addItemDecoration(
-                new MatchAdapter.MatchAdapterDecoration(
+                new MatchAdapter.Decoration(
                 0,
                 50,
                 0,
                 0)
         );
-
+        matchesList.setVisibility(View.VISIBLE);
     }
 }

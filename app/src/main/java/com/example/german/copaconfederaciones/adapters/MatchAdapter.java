@@ -135,22 +135,22 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHol
         }
     }
 
-    public static class MatchAdapterDecoration extends RecyclerView.ItemDecoration{
+    public static class Decoration extends RecyclerView.ItemDecoration{
 
         private int paddingTop;
         private int paddingBottom;
         private int paddingLeft;
         private int paddingRight;
 
-        public MatchAdapterDecoration(int padding) {
+        public Decoration(int padding) {
             this(padding, padding, padding, padding);
         }
 
-        public MatchAdapterDecoration(int paddingTopBottom, int paddingLeftRight) {
+        public Decoration(int paddingTopBottom, int paddingLeftRight) {
             this(paddingTopBottom, paddingTopBottom, paddingLeftRight, paddingLeftRight);
         }
 
-        public MatchAdapterDecoration(int paddingTop, int paddingBottom, int paddingLeft, int paddingRight) {
+        public Decoration(int paddingTop, int paddingBottom, int paddingLeft, int paddingRight) {
             this.paddingTop = paddingTop;
             this.paddingBottom = paddingBottom;
             this.paddingLeft = paddingLeft;
