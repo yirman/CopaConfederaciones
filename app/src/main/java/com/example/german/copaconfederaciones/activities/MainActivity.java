@@ -83,6 +83,10 @@ public class MainActivity extends AppCompatActivity {
                                 PreferenceManager.edit(MainActivity.this)
                                         .putString(Constants.ACCESS_TOKEN, token)
                                         .commit();
+
+                                Intent intent = new Intent(MainActivity.this, MatchListActivity.class);
+                                startActivity(intent);
+                                MainActivity.this.finish();
                             }
                         }
 

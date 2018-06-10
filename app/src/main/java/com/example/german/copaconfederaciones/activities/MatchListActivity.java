@@ -6,6 +6,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.example.german.copaconfederaciones.R;
+import com.example.german.copaconfederaciones.retrofit.ServiceGenerator;
+import com.example.german.copaconfederaciones.utils.Constants;
+import com.example.german.copaconfederaciones.utils.PreferenceManager;
 
 public class MatchListActivity extends AppCompatActivity {
 
@@ -16,9 +19,14 @@ public class MatchListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_match_list);
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        this.matchesList = findViewById(R.id.matches_recycler_view);
-        this.matchesList.setLayoutManager(linearLayoutManager);
+        String accessToken = PreferenceManager
+                .get(this)
+                .getString(Constants.ACCESS_TOKEN, "");
+
+
+//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+//        this.matchesList = findViewById(R.id.matches_recycler_view);
+//        this.matchesList.setLayoutManager(linearLayoutManager);
 
     }
 }

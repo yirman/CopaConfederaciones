@@ -19,6 +19,9 @@ public class MatchData extends RealmObject {
     @Expose
     private Data data;
 
+    public MatchData() {
+    }
+
     public MatchData(int id, Data data) {
         this.id = id;
         this.data = data;
