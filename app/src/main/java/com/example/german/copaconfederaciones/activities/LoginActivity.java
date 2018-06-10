@@ -33,9 +33,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
-    public static final String TAG = MainActivity.class.getSimpleName();
+    public static final String TAG = LoginActivity.class.getSimpleName();
 
     private Button button;
 
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
+                if (ActivityCompat.checkSelfPermission(LoginActivity.this, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
 
                     Configuration userConfiguration = createUserConfiguration();
                     Log.e(TAG, Configuration.TAG + new Gson().toJson(userConfiguration));
@@ -80,13 +80,13 @@ public class MainActivity extends AppCompatActivity {
                                         " " +
                                         data.getAccessToken();
 
-                                PreferenceManager.edit(MainActivity.this)
+                                PreferenceManager.edit(LoginActivity.this)
                                         .putString(Constants.ACCESS_TOKEN, token)
                                         .commit();
 
-                                Intent intent = new Intent(MainActivity.this, MatchListActivity.class);
+                                Intent intent = new Intent(LoginActivity.this, MatchListActivity.class);
                                 startActivity(intent);
-                                MainActivity.this.finish();
+                                LoginActivity.this.finish();
                             }
                         }
 
@@ -131,6 +131,11 @@ public class MainActivity extends AppCompatActivity {
         App app = new App(versionName);
 
         return new Configuration(user, device, app);
+    }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
     }
 }
 
