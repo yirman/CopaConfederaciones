@@ -19,47 +19,58 @@ import retrofit2.Response;
 
 public class MatchListActivity extends AppCompatActivity {
 
+    private Realm realm;
     private RecyclerView matchesList;
+    private MatchData matchData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_match_list);
 
-        String accessToken = PreferenceManager
-                .get(this)
-                .getString(Constants.ACCESS_TOKEN, "");
+        this.realm = Realm.getDefaultInstance();
+        this.matchesList = findViewById(R.id.matches_recycler_view);
 
-        Call<MatchData> matchesService = ServiceGenerator.getMatches(accessToken);
-
-        matchesService.enqueue(new Callback<MatchData>() {
+        this.realm.executeTransaction(new Realm.Transaction() {
             @Override
-            public void onResponse(Call<MatchData> call, Response<MatchData> response) {
-
-                final Realm realm = Realm.getDefaultInstance();
-                final MatchData matchData = response.body();
-                matchData.setId(1);
-
-                realm.executeTransaction(new Realm.Transaction() {
-                    @Override
-                    public void execute(Realm realm) {
-                        realm.insertOrUpdate(matchData);
-                    }
-                });
-
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(MatchListActivity.this);
-                matchesList = findViewById(R.id.matches_recycler_view);
-                matchesList.setLayoutManager(linearLayoutManager);
-
-                MatchAdapter adapter = new MatchAdapter(matchData.getData().getItems());
-                matchesList.setAdapter(adapter);
-            }
-
-            @Override
-            public void onFailure(Call<MatchData> call, Throwable t) {
-
+            public void execute(Realm realm) {
+                matchData = realm.where(MatchData.class).findFirst();
             }
         });
+
+        if( this.matchData == null ){
+
+            String accessToken = PreferenceManager
+                    .get(this)
+                    .getString(Constants.ACCESS_TOKEN, "");
+
+            Call<MatchData> matchesService = ServiceGenerator.getMatches(accessToken);
+
+            matchesService.enqueue(new Callback<MatchData>() {
+                @Override
+                public void onResponse(Call<MatchData> call, Response<MatchData> response) {
+
+                    matchData = response.body();
+                    matchData.setId(1);
+
+                    realm.executeTransaction(new Realm.Transaction() {
+                        @Override
+                        public void execute(Realm realm) {
+                            realm.insertOrUpdate(matchData);
+                        }
+                    });
+
+                    loadMatchData(matchData);
+                }
+
+                @Override
+                public void onFailure(Call<MatchData> call, Throwable t) {
+
+                }
+            });
+        }
+        else
+            this.loadMatchData(matchData);
 
 
     }
@@ -67,5 +78,15 @@ public class MatchListActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         moveTaskToBack(true);
+    }
+
+    private void loadMatchData(MatchData matchData){
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(MatchListActivity.this);
+        matchesList.setLayoutManager(linearLayoutManager);
+
+        MatchAdapter adapter = new MatchAdapter(matchData.getData().getItems());
+        matchesList.setAdapter(adapter);
+
     }
 }
