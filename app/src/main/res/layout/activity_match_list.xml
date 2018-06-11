@@ -1,36 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.german.copaconfederaciones.activities.MatchListActivity">
 
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        style="?android:progressBarStyle"
-        />
-
-    <TextView
-        android:id="@+id/title"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:background="@color/ToreaBay"
-        android:text="@string/coup_confederations"
-        android:textColor="@color/LavenderBlush"
-        android:textSize="@dimen/tv_text_tittle_match_list_size"/>
+        android:layout_height="match_parent">
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            style="?android:progressBarStyle"
+            />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/matches_recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/title"
-        android:background="@color/ToreaBay"
-        android:scrollbars="vertical"
-        android:scrollbarThumbVertical="@drawable/scroll_bar_recycler_view"
-        android:visibility="gone"/>
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:background="@color/ToreaBay"
+            android:text="@string/coup_confederations"
+            android:textColor="@color/LavenderBlush"
+            android:textSize="@dimen/tv_text_tittle_match_list_size"/>
 
-</RelativeLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/matches_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/title"
+            android:background="@color/ToreaBay"
+            android:scrollbars="vertical"
+            android:scrollbarThumbVertical="@drawable/scroll_bar_recycler_view"
+            android:visibility="gone"/>
+
+    </RelativeLayout>
+
+
+</android.support.v4.widget.DrawerLayout>
