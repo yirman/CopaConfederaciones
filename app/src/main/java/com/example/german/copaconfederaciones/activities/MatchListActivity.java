@@ -97,7 +97,9 @@ public class MatchListActivity extends AppCompatActivity {
         matchesList.addItemDecoration(
                 new MatchAdapter.Decoration(
                         0,
-                        50,
+                        20,
+                        20,
+                        20,
                         R.color.Crimson,
                         R.color.Ash)
         );

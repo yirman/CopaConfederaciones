@@ -30,6 +30,7 @@
         android:layout_below="@+id/title"
         android:background="@color/ToreaBay"
         android:scrollbars="vertical"
+        android:scrollbarThumbVertical="@drawable/scroll_bar_recycler_view"
         android:visibility="gone"/>
 
 </RelativeLayout>
