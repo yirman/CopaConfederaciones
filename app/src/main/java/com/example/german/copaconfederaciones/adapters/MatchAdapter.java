@@ -53,7 +53,13 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHol
         holder.scoreTeamB.setText(String.valueOf(items.get(i).getAwayScore()));
         setTeamImage(teamB, holder.imageTeamB);
 
-        holder.status.setText(items.get(i).getEventStatus().getName().getOriginal());
+        String status = items.get(i).getEventStatus().getName().getOriginal();
+        int translationId = Utilities.getTranslationID(status, holder.status.getContext());
+
+        if(translationId == R.string.not_found)
+            holder.status.setText(status);
+        else
+            holder.status.setText(translationId);
     }
 
     private void setTeamImage(String team, ImageView imageView){

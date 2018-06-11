@@ -2,13 +2,14 @@ package com.example.german.copaconfederaciones.utils;
 
 import android.content.Context;
 
+import com.example.german.copaconfederaciones.R;
+
 import org.joda.time.DateTime;
 import org.joda.time.LocalDateTime;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -16,6 +17,22 @@ import java.util.Date;
  */
 
 public class Utilities {
+
+    public static int getTranslationID(String value, Context context) {
+
+        try {
+
+            int id =  context.getResources().getIdentifier(value, "string", context.getPackageName());
+
+            if(id != 0)
+                return id;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return R.string.not_found;
+    }
 
     public static String toLocalDateTime(String date){
 

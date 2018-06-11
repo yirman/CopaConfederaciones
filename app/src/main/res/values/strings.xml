@@ -11,4 +11,8 @@
     <string name="team_b">Team B</string>
     <string name="score">N</string>
     <string name="separator">:</string>
+
+    /*Translations*/
+    <string name="Finished">Finalizado</string>
+    <string name="not_found" />
 </resources>
