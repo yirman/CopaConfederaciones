@@ -20,6 +20,8 @@ import java.util.List;
 
 public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHolder>{
 
+    public static final String TAG = MatchAdapter.class.getSimpleName();
+
     private List<Item> items;
 
     public MatchAdapter(List<Item> items) {
