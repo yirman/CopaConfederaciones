@@ -26,6 +26,12 @@ import com.example.german.copaconfederaciones.retrofit.ServiceGenerator;
 import com.example.german.copaconfederaciones.utils.Constants;
 import com.example.german.copaconfederaciones.utils.PreferenceManager;
 import com.google.gson.Gson;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
 
 import java.util.Locale;
 
@@ -44,13 +50,33 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-            if(ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_DENIED){
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+//            if(ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_DENIED){
+//
+//                ActivityCompat.requestPermissions(this,
+//                        new String[]{Manifest.permission.READ_PHONE_STATE},
+//                        Constants.MY_PERMISSION_READ_PHONE_STATE);
+//            }
 
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.READ_PHONE_STATE},
-                        Constants.MY_PERMISSION_READ_PHONE_STATE);
-            }
+
+        Dexter.withActivity(this)
+                .withPermission(Manifest.permission.READ_PHONE_STATE)
+                .withListener(new PermissionListener() {
+                    @Override
+                    public void onPermissionGranted(PermissionGrantedResponse response) {
+                        Log.e("TAG", "puto");
+                    }
+
+                    @Override
+                    public void onPermissionDenied(PermissionDeniedResponse response) {
+
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
+
+                    }
+                }).check();
 
         button = findViewById(R.id.button);
 
