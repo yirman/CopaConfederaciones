@@ -7,8 +7,8 @@ android {
     defaultConfig {
         applicationId "com.example.german.copaconfederaciones"
         minSdkVersion 19
-        versionCode 8
-        versionName "1.7.0"
+        versionCode 9
+        versionName "1.8.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
