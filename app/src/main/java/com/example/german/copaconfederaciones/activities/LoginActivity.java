@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Point;
 import android.os.Build;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,6 +27,16 @@ import com.example.german.copaconfederaciones.retrofit.ServiceGenerator;
 import com.example.german.copaconfederaciones.utils.Constants;
 import com.example.german.copaconfederaciones.utils.PreferenceManager;
 import com.google.gson.Gson;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.DexterError;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.PermissionRequestErrorListener;
+import com.karumi.dexter.listener.single.CompositePermissionListener;
+import com.karumi.dexter.listener.single.PermissionListener;
+import com.karumi.dexter.listener.single.SnackbarOnDeniedPermissionListener;
 
 import java.util.Locale;
 
@@ -38,21 +49,61 @@ public class LoginActivity extends AppCompatActivity {
     public static final String TAG = LoginActivity.class.getSimpleName();
 
     private Button button;
+    private PermissionListener permissionListener;
+    private PermissionListener snackbarOnDeniedPermissionListener;
+    private CompositePermissionListener compositePermissionListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-            if(ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_DENIED){
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+//            if(ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_DENIED){
+//
+//                ActivityCompat.requestPermissions(this,
+//                        new String[]{Manifest.permission.READ_PHONE_STATE},
+//                        Constants.MY_PERMISSION_READ_PHONE_STATE);
+//            }
 
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.READ_PHONE_STATE},
-                        Constants.MY_PERMISSION_READ_PHONE_STATE);
-            }
 
         button = findViewById(R.id.button);
+
+        permissionListener = new PermissionListener() {
+            @Override
+            public void onPermissionGranted(PermissionGrantedResponse response) {
+
+            }
+
+            @Override
+            public void onPermissionDenied(PermissionDeniedResponse response) {
+
+            }
+
+            @Override
+            public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
+                token.continuePermissionRequest();
+            }
+        };
+
+        snackbarOnDeniedPermissionListener = SnackbarOnDeniedPermissionListener.Builder
+                .with(button, "Camera access is needed to take pictures of your dog")
+                .withOpenSettingsButton("Settings")
+                .withCallback(new Snackbar.Callback() {
+                    @Override
+                    public void onShown(Snackbar snackbar) {
+                        // Event handler for when the given Snackbar is visible
+                    }
+
+                    @Override
+                    public void onDismissed(Snackbar snackbar, int event) {
+                        // Event handler for when the given Snackbar has been dismissed
+                    }
+                }).build();
+
+        compositePermissionListener =
+                new CompositePermissionListener(permissionListener, snackbarOnDeniedPermissionListener);
+
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,9 +147,35 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     });
                 }
+                else{
+
+                    Dexter.withActivity(LoginActivity.this)
+                            .withPermission(android.Manifest.permission.READ_PHONE_STATE)
+                            .withListener(compositePermissionListener)
+                            .withErrorListener(new PermissionRequestErrorListener() {
+                                @Override public void onError(DexterError error) {
+                                    Log.e(TAG, "There was an error: " + error.toString());
+                                }
+                            }).check();
+
+                }
 
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        Dexter.withActivity(this)
+                .withPermission(android.Manifest.permission.READ_PHONE_STATE)
+                .withListener(compositePermissionListener)
+                .withErrorListener(new PermissionRequestErrorListener() {
+                    @Override public void onError(DexterError error) {
+                        Log.e(TAG, "There was an error: " + error.toString());
+                    }
+                }).check();
     }
 
     private Configuration createUserConfiguration() {
