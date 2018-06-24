@@ -47,4 +47,6 @@ dependencies {
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
 
     compile 'joda-time:joda-time:2.10'
+
+    implementation 'com.karumi:dexter:5.0.0'
 }
