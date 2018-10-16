@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.german.copaconfederaciones">
 
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
@@ -21,6 +25,12 @@
         </activity>
         <activity android:name=".activities.MatchListActivity" />
         <activity android:name=".activities.LoginActivity" />
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="2b6fd6566872b0c08de02d76012ad11cfa61f924"
+            />
+
     </application>
 
 </manifest>

@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'realm-android'
+apply plugin: 'io.fabric'
 
 android {
     buildToolsVersion "27.0.3"
@@ -26,6 +27,7 @@ android {
 
 buildscript {
     repositories {
+        maven { url 'https://maven.fabric.io/public' }
         jcenter()
     }
 
@@ -56,4 +58,8 @@ dependencies {
     implementation 'com.karumi:dexter:4.2.0'
 
     compile 'com.android.support:design:27.1.1'
+
+    compile('com.crashlytics.sdk.android:crashlytics:2.9.5@aar') {
+        transitive = true;
+    }
 }

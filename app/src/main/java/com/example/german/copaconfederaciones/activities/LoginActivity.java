@@ -27,12 +27,15 @@ import com.example.german.copaconfederaciones.utils.Constants;
 import com.example.german.copaconfederaciones.utils.PreferenceManager;
 import com.google.gson.Gson;
 import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.karumi.dexter.listener.single.PermissionListener;
 
+import java.util.List;
 import java.util.Locale;
 
 import retrofit2.Call;
@@ -59,24 +62,47 @@ public class LoginActivity extends AppCompatActivity {
 //            }
 
 
+//        Dexter.withActivity(this)
+//                .withPermission(Manifest.permission.READ_PHONE_STATE)
+//                .withListener(new PermissionListener() {
+//                    @Override
+//                    public void onPermissionGranted(PermissionGrantedResponse response) {
+//                        Log.e("TAG", "puto");
+//                    }
+//
+//                    @Override
+//                    public void onPermissionDenied(PermissionDeniedResponse response) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
+//
+//                    }
+//                }).check();
+
         Dexter.withActivity(this)
-                .withPermission(Manifest.permission.READ_PHONE_STATE)
-                .withListener(new PermissionListener() {
-                    @Override
-                    public void onPermissionGranted(PermissionGrantedResponse response) {
-                        Log.e("TAG", "puto");
-                    }
+                .withPermissions(
+                        Manifest.permission.ACCESS_COARSE_LOCATION,
+                        Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.READ_PHONE_STATE
+                ).withListener(new MultiplePermissionsListener() {
+            @Override
+            public void onPermissionsChecked(MultiplePermissionsReport report) {
 
-                    @Override
-                    public void onPermissionDenied(PermissionDeniedResponse response) {
+                List<PermissionGrantedResponse> grantedPermissionResponses = report.getGrantedPermissionResponses();
 
-                    }
+                for(PermissionGrantedResponse p: grantedPermissionResponses){
+                    Log.e(TAG, p.toString());
+                }
 
-                    @Override
-                    public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
+            }
 
-                    }
-                }).check();
+            @Override
+            public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+
+            }
+        }).check();
 
         button = findViewById(R.id.button);
 
