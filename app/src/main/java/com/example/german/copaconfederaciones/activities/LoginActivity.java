@@ -27,6 +27,7 @@ import com.example.german.copaconfederaciones.utils.Constants;
 import com.example.german.copaconfederaciones.utils.PreferenceManager;
 import com.google.gson.Gson;
 import com.karumi.dexter.Dexter;
+import com.karumi.dexter.DexterBuilder;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
@@ -48,61 +49,12 @@ public class LoginActivity extends AppCompatActivity {
 
     private Button button;
 
+    private DexterBuilder dexterBuilder;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-//            if(ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_DENIED){
-//
-//                ActivityCompat.requestPermissions(this,
-//                        new String[]{Manifest.permission.READ_PHONE_STATE},
-//                        Constants.MY_PERMISSION_READ_PHONE_STATE);
-//            }
-
-
-//        Dexter.withActivity(this)
-//                .withPermission(Manifest.permission.READ_PHONE_STATE)
-//                .withListener(new PermissionListener() {
-//                    @Override
-//                    public void onPermissionGranted(PermissionGrantedResponse response) {
-//                        Log.e("TAG", "puto");
-//                    }
-//
-//                    @Override
-//                    public void onPermissionDenied(PermissionDeniedResponse response) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
-//
-//                    }
-//                }).check();
-
-        Dexter.withActivity(this)
-                .withPermissions(
-                        Manifest.permission.ACCESS_COARSE_LOCATION,
-                        Manifest.permission.ACCESS_FINE_LOCATION,
-                        Manifest.permission.READ_PHONE_STATE
-                ).withListener(new MultiplePermissionsListener() {
-            @Override
-            public void onPermissionsChecked(MultiplePermissionsReport report) {
-
-                List<PermissionGrantedResponse> grantedPermissionResponses = report.getGrantedPermissionResponses();
-
-                for(PermissionGrantedResponse p: grantedPermissionResponses){
-                    Log.e(TAG, p.toString());
-                }
-
-            }
-
-            @Override
-            public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
-
-            }
-        }).check();
 
         button = findViewById(R.id.button);
 
@@ -111,44 +63,76 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 if (ActivityCompat.checkSelfPermission(LoginActivity.this, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
-
-                    Configuration userConfiguration = createUserConfiguration();
-                    Log.e(TAG, Configuration.TAG + new Gson().toJson(userConfiguration));
-
-                    Call<PostResponse> login = ServiceGenerator.login(userConfiguration);
-
-                    login.enqueue(new Callback<PostResponse>() {
-                        @Override
-                        public void onResponse(Call<PostResponse> call, Response<PostResponse> response) {
-
-                            Log.e(TAG, String.valueOf(response.code()));
-
-                            if(response.isSuccessful()){
-                                Log.e(TAG, PostResponse.TAG + new Gson().toJson(response.body()));
-
-                                Data data = response.body().getData();
-
-                                String token = data.getTokenType() +
-                                        " " +
-                                        data.getAccessToken();
-
-                                PreferenceManager.edit(LoginActivity.this)
-                                        .putString(Constants.ACCESS_TOKEN, token)
-                                        .commit();
-
-                                Intent intent = new Intent(LoginActivity.this, MatchListActivity.class);
-                                startActivity(intent);
-                                LoginActivity.this.finish();
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<PostResponse> call, Throwable t) {
-                            Log.e(TAG, t.getMessage());
-                        }
-                    });
+                    login();
+                }
+                else{
+                    dexterBuilder.check();
                 }
 
+            }
+        });
+
+        dexterBuilder = Dexter.withActivity(this)
+                .withPermissions(Manifest.permission.READ_PHONE_STATE)
+                .withListener(new MultiplePermissionsListener() {
+                    @Override
+                    public void onPermissionsChecked(MultiplePermissionsReport report) {
+
+                        if(report.areAllPermissionsGranted())
+                            login();
+
+                        List<PermissionGrantedResponse> grantedPermissionResponses = report.getGrantedPermissionResponses();
+
+                        for (PermissionGrantedResponse p : grantedPermissionResponses) {
+                            Log.e(TAG, p.toString());
+                        }
+
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+                        token.continuePermissionRequest();
+                    }
+                });
+
+        dexterBuilder.check();
+    }
+
+    private void login(){
+
+        Configuration userConfiguration = createUserConfiguration();
+        Log.e(TAG, Configuration.TAG + new Gson().toJson(userConfiguration));
+
+        Call<PostResponse> login = ServiceGenerator.login(userConfiguration);
+
+        login.enqueue(new Callback<PostResponse>() {
+            @Override
+            public void onResponse(Call<PostResponse> call, Response<PostResponse> response) {
+
+                Log.e(TAG, String.valueOf(response.code()));
+
+                if(response.isSuccessful()){
+                    Log.e(TAG, PostResponse.TAG + new Gson().toJson(response.body()));
+
+                    Data data = response.body().getData();
+
+                    String token = data.getTokenType() +
+                            " " +
+                            data.getAccessToken();
+
+                    PreferenceManager.edit(LoginActivity.this)
+                            .putString(Constants.ACCESS_TOKEN, token)
+                            .commit();
+
+                    Intent intent = new Intent(LoginActivity.this, MatchListActivity.class);
+                    startActivity(intent);
+                    LoginActivity.this.finish();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PostResponse> call, Throwable t) {
+                Log.e(TAG, t.getMessage());
             }
         });
     }
